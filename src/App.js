@@ -112,9 +112,7 @@ class App extends Component {
                             </Button>
                         )}
                     </form>
-                ) : (
-                    <Loader/>
-                )}
+                ) : <Loader/>}
 
             </div>
         );
