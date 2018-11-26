@@ -19,7 +19,8 @@ class App extends Component {
         country: '',
         gender: '',
         checkedTerms: false,
-        modal: false
+        modal: false,
+        loading: false
     };
 
     handleChange(type, e) {
@@ -65,43 +66,57 @@ class App extends Component {
     }
 
     handleSubmit(e) {
-        console.log(this.state);
         e.preventDefault();
+        this.setState({loading: true});
+        setTimeout(() => {
+            this.setState({
+                firstName: '',
+                lastName: '',
+                country: '',
+                gender: '',
+                checkedTerms: false,
+                modal: false,
+                loading: false
+            })
+        }, 1000);
     }
 
-    // todo add loader - 1s after submit
     render() {
-        const {firstName, lastName, country, gender, checkedTerms, modal} = this.state;
+        const {firstName, lastName, country, gender, checkedTerms, modal, loading} = this.state;
 
         return (
-            <form onSubmit={(e) => this.handleSubmit(e)}>
-                <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
-                       onClick={(type) => this.handleModalClickOpen(type)}/>
-                <div className="row">
-                    <Names firstName={firstName} lastName={lastName}
-                           onChange={(type, e) => this.handleChange(type, e)}/>
-                </div>
+            <div id="app">
+                {!loading ? (
+                    <form onSubmit={(e) => this.handleSubmit(e)}>
+                        <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
+                               onClick={(type) => this.handleModalClickOpen(type)}/>
+                        <div className="row">
+                            <Names firstName={firstName} lastName={lastName}
+                                   onChange={(type, e) => this.handleChange(type, e)}/>
+                        </div>
 
-                <div className="row">
-                    <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
-                    <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
-                </div>
-                <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
-                <Button onClick={() => this.handleModalClickOpen()}>Terms & Conditions</Button>
+                        <div className="row">
+                            <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
+                            <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
+                        </div>
+                        <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
+                        <Button onClick={() => this.handleModalClickOpen()}>Terms & Conditions</Button>
 
-
-                {this.state.checkedTerms ? (
-                    <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
-                        Register
-                    </Button>
+                        {this.state.checkedTerms ? (
+                            <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
+                                Register
+                            </Button>
+                        ) : (
+                            <Button variant="outlined" disabled style={{width: '100%'}}>
+                                Please accept Terms & Conditions first
+                            </Button>
+                        )}
+                    </form>
                 ) : (
-                    <Button variant="outlined" disabled style={{width: '100%'}}>
-                        Please accept Terms & Conditions first
-                    </Button>
+                    <Loader/>
                 )}
 
-                <Loader />
-            </form>
+            </div>
         );
     }
 }
