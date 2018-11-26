@@ -52,6 +52,8 @@ class App extends Component {
         console.log(this.state);
         e.preventDefault();
     }
+    // todo add loader - 1s after submit
+    // todo add modal / dialogs
 
     render() {
         const {firstName, lastName, country, gender, checkedTerms} = this.state;
