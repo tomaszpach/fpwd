@@ -70,9 +70,16 @@ class App extends Component {
                 </div>
                 <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)} />
 
-                <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
-                    Register
-                </Button>
+
+                {this.state.checkedTerms ? (
+                    <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
+                        Register
+                    </Button>
+                ) : (
+                    <Button variant="outlined" disabled style={{width: '100%'}}>
+                        Register
+                    </Button>
+                )}
             </form>
         );
     }
