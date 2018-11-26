@@ -1,11 +1,11 @@
 import React from 'react';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const CheckboxTerm = ({checkedTerms, onChange}) => {
+const CheckboxTerm = ({checked, onChange}) => {
     return (
         <div>
             <Checkbox
-                checked={checkedTerms}
+                checked={checked}
                 onChange={(e) => onChange('checkedTerms', e)}
                 value="checkedTerms"
                 color="primary"
