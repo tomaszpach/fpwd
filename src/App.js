@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Transition, CSSTransition} from 'react-transition-group';
 
 // Material parts
 import Button from '@material-ui/core/Button';
@@ -20,7 +21,9 @@ class App extends Component {
         gender: '',
         checkedTerms: false,
         modal: false,
-        loading: false
+        loading: false,
+        in: false,
+        duration: 450
     };
 
     handleChange(type, e) {
@@ -67,7 +70,7 @@ class App extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({loading: true});
+        this.setState({loading: true, in: false});
         setTimeout(() => {
             this.setState({
                 firstName: '',
@@ -76,44 +79,59 @@ class App extends Component {
                 gender: '',
                 checkedTerms: false,
                 modal: false,
-                loading: false
+                loading: false,
+                in: true
             })
         }, 1000);
     }
+
+
+    componentDidMount() {
+        this.setState({in: true})
+    }
+
 
     render() {
         const {firstName, lastName, country, gender, checkedTerms, modal, loading} = this.state;
 
         return (
             <div id="app">
-                {!loading ? (
-                    <form onSubmit={(e) => this.handleSubmit(e)}>
-                        <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
-                               onClick={(type) => this.handleModalClickOpen(type)}/>
-                        <div className="row">
-                            <Names firstName={firstName} lastName={lastName}
-                                   onChange={(type, e) => this.handleChange(type, e)}/>
-                        </div>
+                <Transition
+                    in={this.state.in}
+                    timeout={this.state.duration}
+                >
+                    {
+                        (status) => {
+                            return (!loading ? (
+                                <form className={'fade-transition fade-' + status} onSubmit={(e) => this.handleSubmit(e)}>
+                                    <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
+                                           onClick={(type) => this.handleModalClickOpen(type)}/>
+                                    <div className="row">
+                                        <Names firstName={firstName} lastName={lastName}
+                                               onChange={(type, e) => this.handleChange(type, e)}/>
+                                    </div>
 
-                        <div className="row">
-                            <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
-                            <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
-                        </div>
-                        <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
-                        <Button onClick={() => this.handleModalClickOpen()}>Terms & Conditions</Button>
+                                    <div className="row">
+                                        <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
+                                        <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
+                                    </div>
+                                    <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
+                                    <Button onClick={() => this.handleModalClickOpen()}>Terms & Conditions</Button>
 
-                        {this.state.checkedTerms ? (
-                            <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
-                                Register
-                            </Button>
-                        ) : (
-                            <Button variant="outlined" disabled style={{width: '100%'}}>
-                                Please accept Terms & Conditions first
-                            </Button>
-                        )}
-                    </form>
-                ) : <Loader/>}
-
+                                    {this.state.checkedTerms ? (
+                                        <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
+                                            Register
+                                        </Button>
+                                    ) : (
+                                        <Button variant="outlined" disabled style={{width: '100%'}}>
+                                            Please accept Terms & Conditions first
+                                        </Button>
+                                    )}
+                                </form>
+                            ) : <Loader/>);
+                        }
+                    }
+                </Transition>
             </div>
         );
     }

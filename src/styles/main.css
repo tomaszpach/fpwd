@@ -55,4 +55,10 @@
 .row {
   margin-bottom: 15px; }
 
+.fade-transition {
+  opacity: 0;
+  transition: opacity 450ms; }
+  .fade-transition.fade-entered {
+    opacity: 1; }
+
 /*# sourceMappingURL=main.css.map */

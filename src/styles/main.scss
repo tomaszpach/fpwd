@@ -8,3 +8,12 @@
 .row {
   margin-bottom: 15px;
 }
+
+.fade-transition {
+  opacity: 0;
+  transition: opacity 450ms;
+
+  &.fade-entered {
+    opacity: 1;
+  }
+}
