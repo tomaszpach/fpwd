@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import Names from './components/Names';
 import Country from './components/Country';
 import Gender from "./components/Gender";
-import Checkbox from "./components/Checkbox";
+import CheckboxTerm from "./components/CheckboxTerm";
 
 class App extends Component {
 
@@ -15,7 +15,8 @@ class App extends Component {
         firstName: '',
         lastName: '',
         country: '',
-        gender: ''
+        gender: '',
+        checkedTerms: false
     };
 
     handleChange(type, e) {
@@ -37,6 +38,13 @@ class App extends Component {
             case 'gender':
                 this.setState({gender: value});
                 break;
+
+            case 'checkedTerms':
+                this.setState({checkedTerms: !this.state.checkedTerms});
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -46,14 +54,14 @@ class App extends Component {
     }
 
     render() {
-        const {firstName, lastName, country, gender} = this.state;
+        const {firstName, lastName, country, gender, checkedTerms} = this.state;
 
         return (
             <form onSubmit={(e) => this.handleSubmit(e)}>
                 <Names firstName={firstName} lastName={lastName} onChange={(type, e) => this.handleChange(type, e)}/>
                 <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
                 <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
-                <Checkbox />
+                <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)} />
 
                 <Button type="submit" variant="contained" color="primary">
                     Register
