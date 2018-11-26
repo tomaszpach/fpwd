@@ -19,8 +19,13 @@ const Country = ({country, onChange}) => {
                 <MenuItem value="">
                     <em>None</em>
                 </MenuItem>
+                <MenuItem value="al">Albania</MenuItem>
+                <MenuItem value="by">Białoruś</MenuItem>
+                <MenuItem value="fi">Finlandia</MenuItem>
+                <MenuItem value="lu">Luksemburg</MenuItem>
                 <MenuItem value="pl">Poland</MenuItem>
-                <MenuItem value="uk">United Kingdom</MenuItem>
+                <MenuItem value="ru">Rosja</MenuItem>
+                <MenuItem value="uk">Wielka Brytania</MenuItem>
             </Select>
         </FormControl>
     )
