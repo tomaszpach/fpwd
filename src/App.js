@@ -54,7 +54,7 @@ class App extends Component {
         }
     }
 
-    handleClickOpen(type) {
+    handleModalClickOpen(type) {
         this.setState({modal: !this.state.modal});
         if (type === 'disagree') {
             this.setState({checkedTerms: false})
@@ -75,7 +75,7 @@ class App extends Component {
         return (
             <form onSubmit={(e) => this.handleSubmit(e)}>
                 <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
-                       onClick={(type) => this.handleClickOpen(type)}/>
+                       onClick={(type) => this.handleModalClickOpen(type)}/>
                 <div className="row">
                     <Names firstName={firstName} lastName={lastName}
                            onChange={(type, e) => this.handleChange(type, e)}/>
@@ -86,7 +86,7 @@ class App extends Component {
                     <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
                 </div>
                 <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
-                <Button onClick={() => this.handleClickOpen()}>Terms & Conditions</Button>
+                <Button onClick={() => this.handleModalClickOpen()}>Terms & Conditions</Button>
 
 
                 {this.state.checkedTerms ? (
