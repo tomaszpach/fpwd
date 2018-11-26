@@ -69,8 +69,6 @@ class App extends Component {
     }
 
     // todo add loader - 1s after submit
-    // todo add modal / dialogs
-
     render() {
         const {firstName, lastName, country, gender, checkedTerms, modal} = this.state;
 
