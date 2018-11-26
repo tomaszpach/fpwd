@@ -3,7 +3,7 @@ import TextField from "@material-ui/core/TextField/TextField";
 
 const Names = ({firstName, lastName, onChange}) => {
     return (
-        <div id="first-last" className="row">
+        <div className="names">
             <TextField
                 id="standard-textarea"
                 label="First name"
@@ -11,7 +11,7 @@ const Names = ({firstName, lastName, onChange}) => {
                 margin="normal"
                 value={firstName}
                 onChange={(e) => onChange('firstName', e)}
-                style={{marginRight: 15}}
+                style={{marginRight: 8, width: 'calc(50% - 16px)'}}
 
             />
             <TextField
@@ -21,6 +21,7 @@ const Names = ({firstName, lastName, onChange}) => {
                 margin="normal"
                 value={lastName}
                 onChange={(e) => onChange('lastName', e)}
+                style={{marginLeft: 8, width: 'calc(50% - 16px)'}}
             />
         </div>
     )

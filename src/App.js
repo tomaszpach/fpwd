@@ -58,12 +58,17 @@ class App extends Component {
 
         return (
             <form onSubmit={(e) => this.handleSubmit(e)}>
-                <Names firstName={firstName} lastName={lastName} onChange={(type, e) => this.handleChange(type, e)}/>
-                <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
-                <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
+                <div className="row">
+                    <Names firstName={firstName} lastName={lastName} onChange={(type, e) => this.handleChange(type, e)}/>
+                </div>
+
+                <div className="row">
+                    <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
+                    <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
+                </div>
                 <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)} />
 
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
                     Register
                 </Button>
             </form>

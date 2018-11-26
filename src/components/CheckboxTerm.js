@@ -10,7 +10,7 @@ const CheckboxTerm = ({checkedTerms, onChange}) => {
                 value="checkedTerms"
                 color="primary"
             />
-            Terms
+            <a href="#toggleModal">Terms & Conditions</a>
         </div>
     )
 };
