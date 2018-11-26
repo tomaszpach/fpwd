@@ -9,6 +9,7 @@ import Country from './components/Country';
 import Gender from "./components/Gender";
 import CheckboxTerm from "./components/CheckboxTerm";
 import Modal from './components/Modal';
+import Loader from './components/loader/loader';
 
 class App extends Component {
 
@@ -98,6 +99,8 @@ class App extends Component {
                         Please accept Terms & Conditions first
                     </Button>
                 )}
+
+                <Loader />
             </form>
         );
     }
