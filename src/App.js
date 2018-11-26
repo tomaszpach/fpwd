@@ -17,7 +17,8 @@ class App extends Component {
         lastName: '',
         country: '',
         gender: '',
-        checkedTerms: false
+        checkedTerms: false,
+        modal: false
     };
 
     handleChange(type, e) {
@@ -44,8 +45,21 @@ class App extends Component {
                 this.setState({checkedTerms: !this.state.checkedTerms});
                 break;
 
+            case 'modal':
+                this.setState({modal: !this.state.modal});
+                break;
+
             default:
                 break;
+        }
+    }
+
+    handleClickOpen(type) {
+        this.setState({modal: !this.state.modal});
+        if (type === 'disagree') {
+            this.setState({checkedTerms: false})
+        } else if (type === 'agree') {
+            this.setState({checkedTerms: true})
         }
     }
 
@@ -53,24 +67,28 @@ class App extends Component {
         console.log(this.state);
         e.preventDefault();
     }
+
     // todo add loader - 1s after submit
     // todo add modal / dialogs
 
     render() {
-        const {firstName, lastName, country, gender, checkedTerms} = this.state;
+        const {firstName, lastName, country, gender, checkedTerms, modal} = this.state;
 
         return (
             <form onSubmit={(e) => this.handleSubmit(e)}>
-                <Modal />
+                <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
+                       onClick={(type) => this.handleClickOpen(type)}/>
                 <div className="row">
-                    <Names firstName={firstName} lastName={lastName} onChange={(type, e) => this.handleChange(type, e)}/>
+                    <Names firstName={firstName} lastName={lastName}
+                           onChange={(type, e) => this.handleChange(type, e)}/>
                 </div>
 
                 <div className="row">
                     <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
                     <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
                 </div>
-                <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)} />
+                <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
+                <Button onClick={() => this.handleClickOpen()}>Terms & Conditions</Button>
 
 
                 {this.state.checkedTerms ? (

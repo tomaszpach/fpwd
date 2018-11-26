@@ -3,15 +3,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 const CheckboxTerm = ({checked, onChange}) => {
     return (
-        <div>
-            <Checkbox
-                checked={checked}
-                onChange={(e) => onChange('checkedTerms', e)}
-                value="checkedTerms"
-                color="primary"
-            />
-            <a href="#toggleModal">Terms & Conditions</a>
-        </div>
+        <Checkbox
+            checked={checked}
+            onChange={(e) => onChange('checkedTerms', e)}
+            value="checkedTerms"
+            color="primary"
+        />
     )
 };
 
