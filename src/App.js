@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Transition, CSSTransition} from 'react-transition-group';
+import {Transition} from 'react-transition-group';
 
 // Material parts
 import Button from '@material-ui/core/Button';
@@ -13,7 +13,6 @@ import Modal from './components/Modal';
 import Loader from './components/loader/loader';
 
 class App extends Component {
-
     state = {
         firstName: '',
         lastName: '',
@@ -90,7 +89,6 @@ class App extends Component {
         this.setState({in: true})
     }
 
-
     render() {
         const {firstName, lastName, country, gender, checkedTerms, modal, loading} = this.state;
 
@@ -103,7 +101,8 @@ class App extends Component {
                     {
                         (status) => {
                             return (!loading ? (
-                                <form className={'fade-transition fade-' + status} onSubmit={(e) => this.handleSubmit(e)}>
+                                <form className={'fade-transition fade-' + status}
+                                      onSubmit={(e) => this.handleSubmit(e)}>
                                     <Modal open={modal} onChange={(type, e) => this.handleChange(type, e)}
                                            onClick={(type) => this.handleModalClickOpen(type)}/>
                                     <div className="row">
@@ -115,11 +114,13 @@ class App extends Component {
                                         <Country country={country} onChange={(type, e) => this.handleChange(type, e)}/>
                                         <Gender gender={gender} onChange={(type, e) => this.handleChange(type, e)}/>
                                     </div>
-                                    <CheckboxTerm checked={checkedTerms} onChange={(type, e) => this.handleChange(type, e)}/>
+                                    <CheckboxTerm checked={checkedTerms}
+                                                  onChange={(type, e) => this.handleChange(type, e)}/>
                                     <Button onClick={() => this.handleModalClickOpen()}>Terms & Conditions</Button>
 
                                     {this.state.checkedTerms ? (
-                                        <Button type="submit" variant="contained" color="primary" style={{width: '100%'}}>
+                                        <Button type="submit" variant="contained" color="primary"
+                                                style={{width: '100%'}}>
                                             Register
                                         </Button>
                                     ) : (
