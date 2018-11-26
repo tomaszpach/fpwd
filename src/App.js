@@ -8,6 +8,7 @@ import Names from './components/Names';
 import Country from './components/Country';
 import Gender from "./components/Gender";
 import CheckboxTerm from "./components/CheckboxTerm";
+import Modal from './components/Modal';
 
 class App extends Component {
 
@@ -60,6 +61,7 @@ class App extends Component {
 
         return (
             <form onSubmit={(e) => this.handleSubmit(e)}>
+                <Modal />
                 <div className="row">
                     <Names firstName={firstName} lastName={lastName} onChange={(type, e) => this.handleChange(type, e)}/>
                 </div>
