@@ -77,7 +77,7 @@ class App extends Component {
                     </Button>
                 ) : (
                     <Button variant="outlined" disabled style={{width: '100%'}}>
-                        Register
+                        Please accept Terms & Conditions first
                     </Button>
                 )}
             </form>
